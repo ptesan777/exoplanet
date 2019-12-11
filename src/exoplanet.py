@@ -31,6 +31,10 @@ class ExoPlanet:
         except URLError as e:
             print("Failed to reach the server" + " reason: " + e.reason)
             exit(0)
+        
+        if not self.dataset_:
+            print("dataset is empty")
+            exit(0)
 
     """
     Get list of orphan planets based on the TypeFlag indicator
