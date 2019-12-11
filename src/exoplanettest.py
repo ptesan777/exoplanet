@@ -99,24 +99,54 @@ class TestExoPlanet(unittest.TestCase):
         self.assertEqual(hottest_planet['PlanetIdentifier'], 'Kepler-1289 b')
 
     def test_get_list_of_orphan_planet_name(self):
+
         self.ep.dataset_ = DATASET
         self.assertEqual(self.ep.get_list_of_orphan_planet_name(), ['Kepler-1289 b', 'Gliese 1214 b'])
 
     def test_get_planet_timeline(self):
+
         self.ep.dataset_ = DATASET
         self.assertEqual(self.ep.get_planet_timeline(), {2004: Counter({'medium': 1, 'small': 0, 'large': 0}),
                                     2009: Counter({'small': 1, 'medium': 0, 'large': 0}),
                                     2016: Counter({'small': 1, 'medium': 0, 'large': 0})})
 
     def test_get_planet_orbiting_hottest_star_exception(self):
+
         self.ep.dataset_ = {}
         self.assertEqual(self.ep.get_planet_orbiting_hottest_star(), {})
 
     def test_get_list_of_orphan_planet_name_exception(self):
-        self.ep.dataset_ = {}
+
+        self.ep.dataset_ = [{
+            "PlanetIdentifier": "Kepler-1287 b",
+            "PlanetaryMassJpt": "",
+            "RadiusJpt": 0.137,
+            "PeriodDays": 11.47685909,
+            "SemiMajorAxisAU": "",
+            "Eccentricity": "",
+            "PeriastronDeg": "",
+            "LongitudeDeg": "",
+            "AscendingNodeDeg": "",
+            "InclinationDeg": "",
+            "SurfaceTempK": "",
+            "AgeGyr": "",
+            "DiscoveryMethod": "transit",
+            "DiscoveryYear": 2016,
+            "LastUpdated": "16/05/10",
+            "RightAscension": "19 16 32",
+            "Declination": "+47 03 47",
+            "DistFromSunParsec": "",
+            "HostStarMassSlrMass": 0.96,
+            "HostStarRadiusSlrRad": 0.94,
+            "HostStarMetallicity": -0.05,
+            "HostStarTempK": 5715,
+            "HostStarAgeGyr": ""
+        }]
+
         self.assertEqual(self.ep.get_list_of_orphan_planet_name(), [])
 
-    def test_get_timeline_exception(self):
+    def test_get_timeline_with_empty_dataset(self):
+
         self.ep.dataset_ = {}
         self.assertEqual(self.ep.get_planet_timeline(), {})
 
