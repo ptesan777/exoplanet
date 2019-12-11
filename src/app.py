@@ -1,4 +1,4 @@
-from src.exoplanet import ExoPlanet
+from exoplanet import ExoPlanet
 
 """
 Entry point for app that downloads a catalog of exoplanet data and displays the following information:

@@ -1,5 +1,5 @@
 
-from src.exoplanet import ExoPlanet
+from exoplanet import ExoPlanet
 import unittest
 from collections import Counter
 
@@ -107,3 +107,7 @@ class TestExoPlanet(unittest.TestCase):
         self.assertEqual(timeline, {2004: Counter({'medium': 1, 'small': 0, 'large': 0}),
                                     2009: Counter({'small': 1, 'medium': 0, 'large': 0}),
                                     2016: Counter({'small': 1, 'medium': 0, 'large': 0})})
+
+
+if __name__ == '__main__':
+    unittest.main()
