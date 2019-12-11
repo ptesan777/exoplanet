@@ -91,22 +91,34 @@ class TestExoPlanet(unittest.TestCase):
     def setUp(self):
 
         self.ep = ExoPlanet()
-        self.ep.dataset_ = DATASET
 
     def test_get_hottest_star(self):
 
-        hottest_planet = self.ep.get_hottest_planet()
+        self.ep.dataset_ = DATASET
+        hottest_planet = self.ep.get_planet_orbiting_hottest_star()
         self.assertEqual(hottest_planet['PlanetIdentifier'], 'Kepler-1289 b')
 
     def test_get_list_of_orphan_planet_name(self):
-        list_of_orhpan_planet = self.ep.get_list_of_orphan_planet_name()
-        self.assertEqual(list_of_orhpan_planet, ['Kepler-1289 b', 'Gliese 1214 b'])
+        self.ep.dataset_ = DATASET
+        self.assertEqual(self.ep.get_list_of_orphan_planet_name(), ['Kepler-1289 b', 'Gliese 1214 b'])
 
     def test_get_planet_timeline(self):
-        timeline = self.ep.get_planet_timeline()
-        self.assertEqual(timeline, {2004: Counter({'medium': 1, 'small': 0, 'large': 0}),
+        self.ep.dataset_ = DATASET
+        self.assertEqual(self.ep.get_planet_timeline(), {2004: Counter({'medium': 1, 'small': 0, 'large': 0}),
                                     2009: Counter({'small': 1, 'medium': 0, 'large': 0}),
                                     2016: Counter({'small': 1, 'medium': 0, 'large': 0})})
+
+    def test_get_planet_orbiting_hottest_star_exception(self):
+        self.ep.dataset_ = {}
+        self.assertEqual(self.ep.get_planet_orbiting_hottest_star(), {})
+
+    def test_get_list_of_orphan_planet_name_exception(self):
+        self.ep.dataset_ = {}
+        self.assertEqual(self.ep.get_list_of_orphan_planet_name(), [])
+
+    def test_get_timeline_exception(self):
+        self.ep.dataset_ = {}
+        self.assertEqual(self.ep.get_planet_timeline(), {})
 
 
 if __name__ == '__main__':

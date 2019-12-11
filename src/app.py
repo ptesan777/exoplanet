@@ -24,7 +24,7 @@ if __name__ == "__main__":
     else:
         print("No orphan planets found in the dataset or data unavailable")
 
-    hottest_planet = ep.get_hottest_planet()
+    hottest_planet = ep.get_planet_orbiting_hottest_star()
     if hottest_planet:
         print("Hottest planet: " + hottest_planet['PlanetIdentifier'])
     else:
